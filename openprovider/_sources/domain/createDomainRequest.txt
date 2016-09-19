@@ -1,0 +1,132 @@
+createDomainRequest
+=====================
+
+Purpose
+-------
+
+Registers a domain name with the attributes provided.
+
+Parameters
+----------
+
+======================== ===========
+parameter                description
+======================== ===========
+domain                     :doc:`Domain object </terms/Domain>`, containing domain name and domain extension.
+period                     Domain registration period in years. Could be from 1 to 10 years depending on what range TLD supports.
+ownerHandle                Doman owner contact
+adminHandle                Domain administrative contact
+techHandle                 Domain technical contact
+billingHandle              Domain billing contact
+resellerHandle             Domain reseller contact
+nsGroup                    Plaintext name of the nameserver group, as created by reseller account. Mandatory if 'nameServers' field is empty
+nsTemplateName             Name of the template to use to automatically create DNS zone for the domain
+nameServers                List of :doc:`nameservers </terms/Nameserver>` assigned to current domain
+isDnssecEnabled            Enables or disables DNSSEC on domain that uses nameservers of Openprovider
+useDomicile                Enables use of domicile or trustee address for TLD that require local presence
+isPrivateWhoisEnabled      Enables or disables whois privacy protection (WPP) on domain
+promoCode                  Optional promocode for domain registration
+autorenew                  Whether to allow auto renew for this domain. Possible values: 'on', 'off', 'default' (according to reseller account settings)
+comments                   Comments for this domain. Will be visible in the control panel
+dnssecKeys                 List of `DNSSec keys for this domain <https://doc.openprovider.eu/index.php/API_Format_DNSSEC_Keys>`_
+additionalData             `Additional doman data <https://doc.openprovider.eu/index.php/API_Format_Additional_Data>`_ (mandatory for some TLDs)
+applicationMode            `Application mode <https://doc.openprovider.eu/index.php/API_Format_applicationMode>`_ (required for new gTLDs)
+======================== ===========
+
+
+Return values
+-------------
+
+An array of domain details objects:
+
+========================== =========================
+status                     :doc:`Domain status </terms/DomainStatus>` (ACT, DEL, FAI, PEN, REQ, RRQ, SCH) 
+authCode                   EPP code that is required for domain transfer, only in case if TLD supports it
+activeDate                 Date and time when domain was activated (mutated to status ACT) in Openprovider
+expirationDate             Domain registry expiration date. Returned only if :doc:`domain status </terms/DomainStatus>` is ACT
+expirationDateOpenprovider Date and time by which domain has to be renewed by reseller in Openprovider
+========================== =========================
+
+Possible errors
+---------------
+If the domain registration failed, error TBD is returned. Error details are provided in text form as a part of response.
+
+Preconditions
+-------------
+
+The domain must be available for registration (may be checked by :doc:`checkDomainRequest </domain/checkDomainRequest>`)
+
+Postconditions
+--------------
+
+Domain is queued for registration. The relevant account balance will be deducted according to the domain cost and registration period.
+
+
+Examples
+--------
+
+Using `PHP SDK <https://doc.openprovider.eu/index.php/API_General_Howto#PHP_class_for_easy_API_inclusion>`_:
+
+::
+
+	$request = new OP_Request;
+	$request->setCommand('createDomainRequest')
+	  ->setAuth(array('username' => 'username', 'password' => 'password'))
+	  ->setArgs(array(
+	    'ownerHandle' => 'SR003891-NL',
+	    'adminHandle' => 'SR003891-NL',
+	    'techHandle' => 'SR003891-NL',
+	    'billingHandle' => 'SR003891-NL',
+	    'domain' => array(
+	      'name' => 'this-domain-is-registered',
+	      'extension' => 'com'
+	    ),
+	    'period' => '1',
+	    'nsGroup' => 'dns-openprovider',
+	    'nsTemplateName' => 'Shared hosting server Apollo',
+	  ));
+
+Raw XML
+
+*Please note that newlines and leading spaces are added only for readability. Those whitespaces should be excluded from your XML command before sending it to Openprovider.*
+
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <credentials>
+	    <username>username</username>
+	    <password>password</password>
+	  </credentials>
+	  <createDomainRequest>
+	    <ownerHandle>SR003891-NL</ownerHandle>
+	    <adminHandle>SR003891-NL</adminHandle>
+	    <techHandle>SR003891-NL</techHandle>
+	    <billingHandle>SR003891-NL</billingHandle>
+	    <domain>
+	      <name>this-domain-is-registered</name>
+	      <extension>com</extension>
+	    </domain>
+	    <period>1</period>
+	    <nsGroup>dns-openprovider</nsGroup>
+	    <nsTemplateName>Shared hosting server Apollo</nsTemplateName>
+	  </createDomainRequest>
+	</openXML>
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <reply>
+	    < code>0</code>
+	    <desc></desc>
+	    <data>
+	      <status>ACT</status>
+	      <activationDate>2011-04-22 14:14:32</activationDate>
+	      <expirationDate>2012-04-22 14:41:32</expirationDate>
+	      <expirationDateOpenprovider>2012-04-22 14:41:32</expirationDateOpenprovider>
+	      <authCode>123456</authCode>
+	    </data>
+	  </reply>
+	</openXML>

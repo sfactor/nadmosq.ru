@@ -1,0 +1,91 @@
+deleteDomainRequest
+=====================
+
+Purpose
+-------
+
+Deletes a registered domain under reseller account.
+
+In case of registered domains with status ACT, this will result in a deletion at the registry. Keep in mind that not all TLDs support reactivation option and when available, this option could be quite expensive.
+
+Domains with status FAI can be deleted to get a refund of the paid amount.
+
+Parameters
+----------
+
+==================== ===========
+parameter            description
+==================== ===========
+domain               :doc:`Domain object </terms/Domain>` to be renewed
+id                   Domain ID. Only required if there are two identical domains in your account (for example, in case of pre-registrations)
+type                 Deletion type. Possible values: 'delete' and 'pushtoregistry' (push to registry is not a real deletion, but transfer to registry account. Allowed for .de and .at TLDs only)
+==================== ===========
+
+
+Return values
+-------------
+
+None. In case of success, the return code will be 0.
+
+Possible errors
+---------------
+
+TBD
+
+Preconditions
+-------------
+
+The domain must be registered under current reseller account.
+
+Postconditions
+--------------
+
+Domain is queued for deletion. 
+
+Examples
+--------
+
+Using `PHP SDK <https://doc.openprovider.eu/index.php/API_General_Howto#PHP_class_for_easy_API_inclusion>`_:
+
+::
+
+	$request = new OP_Request;
+	$request->setCommand('deleteDomainRequest')
+	  ->setAuth(array('username' => 'username', 'password' => 'password'))
+	  ->setArgs(array(
+	    'domain' => array(
+	      'name' => 'domain-to-delete',
+	      'extension' => 'nl'
+	    )
+	  ));
+
+Raw XML
+
+*Please note that newlines and leading spaces are added only for readability. Those whitespaces should be excluded from your XML command before sending it to Openprovider.*
+
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <credentials>
+	    <username>username</username>
+	    <password>password</password>
+	  </credentials>
+	  <deleteDomainRequest>
+	    <domain>
+	      <name>domain-to-delete</name>
+	      <extension>nl</extension>
+	    </domain>
+	  </deleteDomainRequest>
+	</openXML>
+	
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <reply>
+	    <code>0</code>
+	    <desc></desc>
+	  </reply>
+	</openXML>

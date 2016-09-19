@@ -1,0 +1,88 @@
+renewDomainRequest
+=====================
+
+Purpose
+-------
+
+Renews a registered doman under reseller account.
+
+Parameters
+----------
+
+==================== ===========
+parameter            description
+==================== ===========
+domain               :doc:`Domain object </terms/Domain>` to be renewed
+period               Domain registration period in years. Could be from 1 to 10 years depending on what range TLD supports.
+==================== ===========
+
+
+Return values
+-------------
+
+None. In case of success, the return code will be 0.
+
+Possible errors
+---------------
+TBD
+
+Preconditions
+-------------
+
+The domain must be registered under current reseller account.
+
+Postconditions
+--------------
+
+Domain is queued for renewal. The relevant account balance will be deducted according to the domain cost and new registration period.
+
+
+Examples
+--------
+
+Using `PHP SDK <https://doc.openprovider.eu/index.php/API_General_Howto#PHP_class_for_easy_API_inclusion>`_:
+
+::
+
+	$request = new OP_Request;
+	$request->setCommand('renewDomainRequest')
+	  ->setAuth(array('username' => 'username', 'password' => 'password'))
+	  ->setArgs(array(
+	    'domain' => array(
+	      'name' => 'openprovider',
+	      'extension' => 'nl'
+	    ),
+	    'period' => 1
+	  ));
+
+Raw XML
+
+*Please note that newlines and leading spaces are added only for readability. Those whitespaces should be excluded from your XML command before sending it to Openprovider.*
+
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <credentials>
+	    <username>username</username>
+	    <password>password</password>
+	  </credentials>
+	  <renewDomainRequest>
+	    <domain>
+	      <name>openprovider</name>
+	      <extension>nl</extension>
+	    </domain>
+	    <period>1</period>
+	  </renewDomainRequest>
+	</openXML>
+	
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <reply>
+	    < code>0</code>
+	    <desc></desc>
+	  </reply>
+	</openXML>

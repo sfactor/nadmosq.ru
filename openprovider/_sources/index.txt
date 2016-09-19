@@ -1,0 +1,12 @@
+
+OpenProvider API reference
+==========================
+
+Contents:
+
+.. toctree::
+	:titlesonly:
+	:maxdepth: 2
+	:glob:
+	
+	domain/index

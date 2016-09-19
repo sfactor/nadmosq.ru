@@ -1,0 +1,113 @@
+retrievePriceDomainRequest
+=====================
+
+Purpose
+-------
+
+Returns the price that applies for a particular domain for this reseller.
+
+Parameters
+----------
+
+==================== ===========
+parameter            description
+==================== ===========
+domain               :doc:`Domain object </terms/Domain>` to be renewed
+operation            Domain operation. Can be one of the following values: 'create' (default), 'transfer', 'renew', 'restore', 'update'
+
+==================== ===========
+
+
+Return values
+-------------
+
+An object with the following fields:
+
+
+========== =============
+price      A `price object <https://doc.openprovider.eu/index.php/API_Format_Price>`_.
+isPremium  Whether the price is premium (0 for standard, 1 for premium)
+========== =============
+
+
+
+
+
+
+Possible errors
+---------------
+
+TBD
+
+Preconditions
+-------------
+
+None
+
+Postconditions
+--------------
+
+None
+
+Examples
+--------
+
+Using `PHP SDK <https://doc.openprovider.eu/index.php/API_General_Howto#PHP_class_for_easy_API_inclusion>`_:
+
+::
+
+	$request = new OP_Request;
+	$request->setCommand('retrievePriceDomainRequest')
+	  ->setAuth(array('username' => 'username', 'password' => 'password'))
+	  ->setArgs(array(
+	    'domain' => array(
+	      'name' => 'domain',
+	      'extension' => 'guru'
+	    ),
+	    'operation' => 'create',
+	  ));
+
+Raw XML
+
+*Please note that newlines and leading spaces are added only for readability. Those whitespaces should be excluded from your XML command before sending it to Openprovider.*
+
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <credentials>
+	    <username>username</username>
+	    <password>password</password>
+	  </credentials>
+	  <retrievePriceDomainRequest>
+	    <domain>
+	      <name>domain</name>
+	      <extension>guru</extension>
+	    </domain>
+	    <operation>create</operation>
+	  </retrievePriceDomainRequest>
+	</openXML>
+	
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <reply>
+	    <code>0</code>
+	    <desc></desc>
+	    <data>
+	      <price>
+	        <product>
+	          <price>100000.00</price>
+	          <currency>USD</currency>
+	        </product>
+	        <reseller>
+	          <price>93381.69</price>
+	          <currency>EUR</currency>
+	        </reseller>
+	      </price>
+	      <isPremium>1</isPremium>
+	    </data>
+	  </reply>
+	</openXML>

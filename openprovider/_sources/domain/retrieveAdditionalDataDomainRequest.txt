@@ -1,0 +1,128 @@
+retrieveAdditionalDataDomainRequest
+===================================
+
+Purpose
+-------
+
+Returns the set of additional data than must be provided for a domain in a specific TLD.
+
+Parameters
+----------
+
+==================== ===========
+parameter            description
+==================== ===========
+domain               :doc:`Domain object </terms/Domain>` to be queried. Only 'extension' field is mandatory.
+==================== ===========
+
+
+Return values
+-------------
+
+A list of additional data fileds each specified with the following object:
+
+============ =============
+name         Field name
+required     Whether the field is mandatory or optional
+type         Field type, e.g. text, check, select, multiselect
+options      List of key-value pairs specifying possible field values and their descriptions
+description  Field desctiption
+============ =============
+
+
+
+Possible errors
+---------------
+
+TBD
+
+Preconditions
+-------------
+
+None
+
+Postconditions
+--------------
+
+None
+
+Examples
+--------
+
+Using `PHP SDK <https://doc.openprovider.eu/index.php/API_General_Howto#PHP_class_for_easy_API_inclusion>`_:
+
+::
+
+	$request = new OP_Request;
+	$request->setCommand('retrieveAdditionalDataDomainRequest')
+	  ->setAuth(array('username' => 'username', 'password' => 'password'))
+	  ->setArgs(array(
+	    'domain' => array(
+	      'extension' => 'us'
+	    ),
+	  ));
+
+
+Raw XML
+
+*Please note that newlines and leading spaces are added only for readability. Those whitespaces should be excluded from your XML command before sending it to Openprovider.*
+
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <credentials>
+	    <username>username</username>
+	    <password>password</password>
+	  </credentials>
+	  <retrieveAdditionalDataDomainRequest>
+	    <domain>
+	      <extension>us</extension>
+	    </domain>
+	  </retrieveAdditionalDataDomainRequest>
+	</openXML>
+	
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <reply>
+	    <code>0</code>
+	    <desc></desc>
+	    <data>
+	      <array>
+	        <item>
+	          <name>nexusAppPurpose</name>
+	          <description>Application purpose</description>
+	          <required>1</required>
+	          <type>select</type>
+	          <options>
+	            <array>
+	              <item>
+	                <value>P1</value>
+	                <description>Business use for profit</description>
+	              </item>
+	              <item>
+	                <value>P2</value>
+	                <description>Non-profit business, club, association, religious organization, etc.</description>
+	              </item>
+	              <item>
+	                <value>P3</value>
+	                <description>Personal use</description>
+	              </item>
+	              <item>
+	                <value>P4</value>
+	                <description>Education purposes</description>
+	              </item>
+	              <item>
+	                <value>P5</value>
+	                <description>Government purposes</description>
+	              </item>
+	            </array>
+	          </options>
+	        </item>
+	      </array>
+	    </data>
+	  </reply>
+	</openXML>

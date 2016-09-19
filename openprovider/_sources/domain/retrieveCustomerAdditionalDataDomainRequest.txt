@@ -1,0 +1,128 @@
+retrieveCustomerAdditionalDataDomainRequest
+===========================================
+
+Purpose
+-------
+
+Returns the set of additional data than must be provided for a customer registering domain in a specific TLD.
+
+Parameters
+----------
+
+==================== ===========
+parameter            description
+==================== ===========
+domain               :doc:`Domain object </terms/Domain>` to be queried. Only 'extension' field is mandatory.
+==================== ===========
+
+
+Return values
+-------------
+
+A list of additional data fileds each specified with the following object:
+
+============ =============
+name         Field name
+required     Whether the field is mandatory or optional
+type         Field type, e.g. text, check, select, multiselect
+options      List of key-value pairs specifying possible field values and their descriptions
+description  Field desctiption
+============ =============
+
+
+
+Possible errors
+---------------
+
+TBD
+
+Preconditions
+-------------
+
+None
+
+Postconditions
+--------------
+
+None
+
+Examples
+--------
+
+Using `PHP SDK <https://doc.openprovider.eu/index.php/API_General_Howto#PHP_class_for_easy_API_inclusion>`_:
+
+::
+
+	$request = new OP_Request;
+	$request->setCommand('retrieveCustomerAdditionalDataDomainRequest')
+	  ->setAuth(array('username' => 'username', 'password' => 'password'))
+	  ->setArgs(array(
+	    'domain' => array(
+	      'extension' => 'us'
+	    ),
+	  ));
+
+
+Raw XML
+
+*Please note that newlines and leading spaces are added only for readability. Those whitespaces should be excluded from your XML command before sending it to Openprovider.*
+
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <credentials>
+	    <username>username</username>
+	    <password>password</password>
+	  </credentials>
+	  <retrieveCustomerAdditionalDataDomainRequest>
+	    <domain>
+	      <extension>us</extension>
+	    </domain>
+	  </retrieveCustomerAdditionalDataDomainRequest>
+	</openXML>
+	
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <reply>
+	    <code>0</code>
+	    <desc></desc>
+	    <data>
+	      <array>
+	        <item>
+	          <name>nexusCategory</name>
+	          <description>Nexus category</description>
+	          <required>1</required>
+	          <type>select</type>
+	          <options>
+	            <array>
+	              <item>
+	                <value>C11</value>
+	                <description>Natural person who is a United States citizen</description>
+	              </item>
+	              <item>
+	                <value>C12</value>
+	                <description>Natural person whois a permanent resident of the United States of America or any of its possessions or territories. A U.S. Organization incorporated within one of the fifty (50) U.S. States, the District of Columbia, or any of the U.S. Possessions or territories or organized or otherwise constituted under the laws of a state of the United States of America, the District of Columbia or any of its possessions or territories or a U.S. Federal, state, or local government entity or a political subdivision thereof.</description>
+	              </item>
+	              <item>
+	                <value>C21</value>
+	                <description>C21 - U.S. Organization incorporated within one of the 50 states or a U.S. Territory. An entity or organization that has a bona fide presence in the Unite States of America or any of its possessions or territories.</description>
+	              </item>
+	              <item>
+	                <value>C31</value>
+	                <description>Regularly engages in lawful activities (sales of goods or services or other business, commercial or non-commercial, including not-for-profit relations in the United States).</description>
+	              </item>
+	              <item>
+	                <value>C32</value>
+	                <description>Entity has an office or other facility in the US.</description>
+	              </item>
+	            </array>
+	          </options>
+	        </item>
+	      </array>
+	    </data>
+	  </reply>
+	</openXML>

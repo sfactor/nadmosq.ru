@@ -1,0 +1,145 @@
+modifyDomainRequest
+=====================
+
+Purpose
+-------
+
+Modifies the attributes of an existing domain in reseller account
+
+Parameters
+----------
+
+======================== ===========
+parameter                description
+======================== ===========
+domain                     :doc:`Domain object </terms/Domain>`, containing domain name and domain extension.
+ownerHandle                Doman owner contact
+adminHandle                Domain administrative contact
+techHandle                 Domain technical contact
+billingHandle              Domain billing contact
+resellerHandle             Domain reseller contact
+nsGroup                    Plaintext name of the nameserver group, as created by reseller account. Mandatory if 'nameServers' field is empty
+nsTemplateName             Name of the template to use to automatically create DNS zone for the domain
+nameServers                List of :doc:`nameservers </terms/Nameserver>` assigned to current domain
+isDnssecEnabled            Enables or disables DNSSEC on domain that uses nameservers of Openprovider
+useDomicile                Enables use of domicile or trustee address for TLD that require local presence
+isPrivateWhoisEnabled      Enables or disables whois privacy protection (WPP) on domain
+isLocked                   Enabling or disabling 'theft protection'. When domain is 'locked' (isLocked = 1) it means that EPP flag clientTransferProhibited is enabled on the side of registry and transfer operation with domain is not possible.
+autorenew                  Whether to allow auto renew for this domain. Possible values: 'on', 'off', 'default' (according to reseller account settings)
+comments                   Comments for this domain. Will be visible in the control panel
+dnssecKeys                 List of `DNSSec keys for this domain <https://doc.openprovider.eu/index.php/API_Format_DNSSEC_Keys>`_
+scheduledAt                Date and time when domain transfer should be initiated (format: 'Y-m-d H:i:s', example: '2016-01-01 15:00:00'). Only accepted if :doc:`domain status </terms/DomainStatus>` is SCH
+======================== ===========
+
+
+Return values
+-------------
+
+None.
+
+In case of success, the return code will be 0.
+
+Possible errors
+---------------
+
+TBD
+
+Preconditions
+-------------
+
+The domain must be registered (or scheduled for registration) under the reseller account.
+
+Postconditions
+--------------
+
+Domain information is updated according to the provided data.
+
+
+Examples
+--------
+
+Using `PHP SDK <https://doc.openprovider.eu/index.php/API_General_Howto#PHP_class_for_easy_API_inclusion>`_:
+
+::
+
+	$request = new OP_Request;
+	$request->setCommand('modifyDomainRequest')
+	  ->setAuth(array('username' => 'username', 'password' => 'password'))
+	  ->setArgs(array(
+	    'adminHandle' => 'SR003891-NL',
+	    'techHandle' => 'SR003891-NL',
+	    'billingHandle' => 'SR003891-NL',
+	    'domain' => array(
+	      'name' => 'openprovider',
+	      'extension' => 'nl'
+	    ),
+	    'nsGroup' => 'MyServer',
+	    'isDnssecEnabled' => 1,
+	    'dnssecKeys' => array(
+	      array(
+	        'flags' => 256,
+	        'alg' => 8,
+	        'protocol' => 3,
+	        'pubKey' => 'AwEAA{...}VNfPps3=',
+	      ),
+	      array(
+	        'flags' => 257,
+	        'alg' => 8,
+	        'protocol' => 3,
+	        'pubKey' => 'AwEAA{...}TK5f9fs=',
+	      ),
+	    ),
+	  ));
+
+Raw XML
+
+*Please note that newlines and leading spaces are added only for readability. Those whitespaces should be excluded from your XML command before sending it to Openprovider.*
+
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <credentials>
+	    <username>username</username>
+	    <password>password</password>
+	  </credentials>
+	  <modifyDomainRequest>
+	    <adminHandle>SR003891-NL</adminHandle>
+	    <techHandle>SR003891-NL</techHandle>
+	    <billingHandle>SR003891-NL</billingHandle>
+	    <domain>
+	      <name>openprovider</name>
+	      <extension>nl</extension>
+	    </domain>
+	    <nsGroup>MyServer</nsGroup>
+	    <isDnssecEnabled>1</isDnssecEnabled>
+	    <dnssecKeys>
+	      <array>
+	        <item>
+	          <flags>256</flags>
+	          <alg>8</alg>
+	          <protocol>3</protocol>
+	          <pubKey>AwEAA{...}VNfPps3=</pubKey>
+	        </item>
+	        <item>
+	          <flags>257</flags>
+	          <alg>8</alg>
+	          <protocol>3</protocol>
+	          <pubKey>AwEAA{...}TK5f9fs=</pubKey>
+	        </item>
+	      </array>
+	    </dnssecKeys>
+	  </modifyDomainRequest>
+	</openXML>
+
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <reply>
+	    <code>0</code>
+	    <desc></desc>
+	  </reply>
+	</openXML>

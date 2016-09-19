@@ -1,0 +1,291 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>createDomainRequest &#8212; OpenProvider API 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="OpenProvider API 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Domain module" href="index.html" />
+    <link rel="next" title="deleteDomainRequest" href="deleteDomainRequest.html" />
+    <link rel="prev" title="checkDomainRequest" href="checkDomainRequest.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="deleteDomainRequest.html" title="deleteDomainRequest"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="checkDomainRequest.html" title="checkDomainRequest"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">OpenProvider API 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Domain module</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><ul class="globaltoc">
+	<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Domain module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="checkDomainRequest.html">checkDomainRequest</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">createDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deleteDomainRequest.html">deleteDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifyDomainRequest.html">modifyDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renewDomainRequest.html">renewDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="restoreDomainRequest.html">restoreDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="retrieveAdditionalDataDomainRequest.html">retrieveAdditionalDataDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="retrieveCustomerAdditionalDataDomainRequest.html">retrieveCustomerAdditionalDataDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="retrieveDomainRequest.html">retrieveDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="retrievePriceDomainRequest.html">retrievePriceDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchDomainRequest.html">searchDomainRequest</a></li>
+</ul>
+</li>
+</ul>
+
+</ul>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="createdomainrequest">
+<h1>createDomainRequest<a class="headerlink" href="#createdomainrequest" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>Registers a domain name with the attributes provided.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">parameter</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>domain</td>
+<td><a class="reference internal" href="../terms/Domain.html"><span class="doc">Domain object</span></a>, containing domain name and domain extension.</td>
+</tr>
+<tr class="row-odd"><td>period</td>
+<td>Domain registration period in years. Could be from 1 to 10 years depending on what range TLD supports.</td>
+</tr>
+<tr class="row-even"><td>ownerHandle</td>
+<td>Doman owner contact</td>
+</tr>
+<tr class="row-odd"><td>adminHandle</td>
+<td>Domain administrative contact</td>
+</tr>
+<tr class="row-even"><td>techHandle</td>
+<td>Domain technical contact</td>
+</tr>
+<tr class="row-odd"><td>billingHandle</td>
+<td>Domain billing contact</td>
+</tr>
+<tr class="row-even"><td>resellerHandle</td>
+<td>Domain reseller contact</td>
+</tr>
+<tr class="row-odd"><td>nsGroup</td>
+<td>Plaintext name of the nameserver group, as created by reseller account. Mandatory if &#8216;nameServers&#8217; field is empty</td>
+</tr>
+<tr class="row-even"><td>nsTemplateName</td>
+<td>Name of the template to use to automatically create DNS zone for the domain</td>
+</tr>
+<tr class="row-odd"><td>nameServers</td>
+<td>List of <a class="reference internal" href="../terms/Nameserver.html"><span class="doc">nameservers</span></a> assigned to current domain</td>
+</tr>
+<tr class="row-even"><td>isDnssecEnabled</td>
+<td>Enables or disables DNSSEC on domain that uses nameservers of Openprovider</td>
+</tr>
+<tr class="row-odd"><td>useDomicile</td>
+<td>Enables use of domicile or trustee address for TLD that require local presence</td>
+</tr>
+<tr class="row-even"><td>isPrivateWhoisEnabled</td>
+<td>Enables or disables whois privacy protection (WPP) on domain</td>
+</tr>
+<tr class="row-odd"><td>promoCode</td>
+<td>Optional promocode for domain registration</td>
+</tr>
+<tr class="row-even"><td>autorenew</td>
+<td>Whether to allow auto renew for this domain. Possible values: &#8216;on&#8217;, &#8216;off&#8217;, &#8216;default&#8217; (according to reseller account settings)</td>
+</tr>
+<tr class="row-odd"><td>comments</td>
+<td>Comments for this domain. Will be visible in the control panel</td>
+</tr>
+<tr class="row-even"><td>dnssecKeys</td>
+<td>List of <a class="reference external" href="https://doc.openprovider.eu/index.php/API_Format_DNSSEC_Keys">DNSSec keys for this domain</a></td>
+</tr>
+<tr class="row-odd"><td>additionalData</td>
+<td><a class="reference external" href="https://doc.openprovider.eu/index.php/API_Format_Additional_Data">Additional doman data</a> (mandatory for some TLDs)</td>
+</tr>
+<tr class="row-even"><td>applicationMode</td>
+<td><a class="reference external" href="https://doc.openprovider.eu/index.php/API_Format_applicationMode">Application mode</a> (required for new gTLDs)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="return-values">
+<h2>Return values<a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
+<p>An array of domain details objects:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>status</td>
+<td><a class="reference internal" href="../terms/DomainStatus.html"><span class="doc">Domain status</span></a> (ACT, DEL, FAI, PEN, REQ, RRQ, SCH)</td>
+</tr>
+<tr class="row-even"><td>authCode</td>
+<td>EPP code that is required for domain transfer, only in case if TLD supports it</td>
+</tr>
+<tr class="row-odd"><td>activeDate</td>
+<td>Date and time when domain was activated (mutated to status ACT) in Openprovider</td>
+</tr>
+<tr class="row-even"><td>expirationDate</td>
+<td>Domain registry expiration date. Returned only if <a class="reference internal" href="../terms/DomainStatus.html"><span class="doc">domain status</span></a> is ACT</td>
+</tr>
+<tr class="row-odd"><td>expirationDateOpenprovider</td>
+<td>Date and time by which domain has to be renewed by reseller in Openprovider</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="possible-errors">
+<h2>Possible errors<a class="headerlink" href="#possible-errors" title="Permalink to this headline">¶</a></h2>
+<p>If the domain registration failed, error TBD is returned. Error details are provided in text form as a part of response.</p>
+</div>
+<div class="section" id="preconditions">
+<h2>Preconditions<a class="headerlink" href="#preconditions" title="Permalink to this headline">¶</a></h2>
+<p>The domain must be available for registration (may be checked by <a class="reference internal" href="checkDomainRequest.html"><span class="doc">checkDomainRequest</span></a>)</p>
+</div>
+<div class="section" id="postconditions">
+<h2>Postconditions<a class="headerlink" href="#postconditions" title="Permalink to this headline">¶</a></h2>
+<p>Domain is queued for registration. The relevant account balance will be deducted according to the domain cost and registration period.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Using <a class="reference external" href="https://doc.openprovider.eu/index.php/API_General_Howto#PHP_class_for_easy_API_inclusion">PHP SDK</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$request = new OP_Request;
+$request-&gt;setCommand(&#39;createDomainRequest&#39;)
+  -&gt;setAuth(array(&#39;username&#39; =&gt; &#39;username&#39;, &#39;password&#39; =&gt; &#39;password&#39;))
+  -&gt;setArgs(array(
+    &#39;ownerHandle&#39; =&gt; &#39;SR003891-NL&#39;,
+    &#39;adminHandle&#39; =&gt; &#39;SR003891-NL&#39;,
+    &#39;techHandle&#39; =&gt; &#39;SR003891-NL&#39;,
+    &#39;billingHandle&#39; =&gt; &#39;SR003891-NL&#39;,
+    &#39;domain&#39; =&gt; array(
+      &#39;name&#39; =&gt; &#39;this-domain-is-registered&#39;,
+      &#39;extension&#39; =&gt; &#39;com&#39;
+    ),
+    &#39;period&#39; =&gt; &#39;1&#39;,
+    &#39;nsGroup&#39; =&gt; &#39;dns-openprovider&#39;,
+    &#39;nsTemplateName&#39; =&gt; &#39;Shared hosting server Apollo&#39;,
+  ));
+</pre></div>
+</div>
+<p>Raw XML</p>
+<p><em>Please note that newlines and leading spaces are added only for readability. Those whitespaces should be excluded from your XML command before sending it to Openprovider.</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;openXML&gt;
+  &lt;credentials&gt;
+    &lt;username&gt;username&lt;/username&gt;
+    &lt;password&gt;password&lt;/password&gt;
+  &lt;/credentials&gt;
+  &lt;createDomainRequest&gt;
+    &lt;ownerHandle&gt;SR003891-NL&lt;/ownerHandle&gt;
+    &lt;adminHandle&gt;SR003891-NL&lt;/adminHandle&gt;
+    &lt;techHandle&gt;SR003891-NL&lt;/techHandle&gt;
+    &lt;billingHandle&gt;SR003891-NL&lt;/billingHandle&gt;
+    &lt;domain&gt;
+      &lt;name&gt;this-domain-is-registered&lt;/name&gt;
+      &lt;extension&gt;com&lt;/extension&gt;
+    &lt;/domain&gt;
+    &lt;period&gt;1&lt;/period&gt;
+    &lt;nsGroup&gt;dns-openprovider&lt;/nsGroup&gt;
+    &lt;nsTemplateName&gt;Shared hosting server Apollo&lt;/nsTemplateName&gt;
+  &lt;/createDomainRequest&gt;
+&lt;/openXML&gt;
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;openXML&gt;
+  &lt;reply&gt;
+    &lt; code&gt;0&lt;/code&gt;
+    &lt;desc&gt;&lt;/desc&gt;
+    &lt;data&gt;
+      &lt;status&gt;ACT&lt;/status&gt;
+      &lt;activationDate&gt;2011-04-22 14:14:32&lt;/activationDate&gt;
+      &lt;expirationDate&gt;2012-04-22 14:41:32&lt;/expirationDate&gt;
+      &lt;expirationDateOpenprovider&gt;2012-04-22 14:41:32&lt;/expirationDateOpenprovider&gt;
+      &lt;authCode&gt;123456&lt;/authCode&gt;
+    &lt;/data&gt;
+  &lt;/reply&gt;
+&lt;/openXML&gt;
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="deleteDomainRequest.html" title="deleteDomainRequest"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="checkDomainRequest.html" title="checkDomainRequest"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">OpenProvider API 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Domain module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Sam Faktorovich.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,385 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>searchDomainRequest &#8212; OpenProvider API 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title="OpenProvider API 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Domain module" href="index.html" />
+    <link rel="prev" title="retrievePriceDomainRequest" href="retrievePriceDomainRequest.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="retrievePriceDomainRequest.html" title="retrievePriceDomainRequest"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">OpenProvider API 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Domain module</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><ul class="globaltoc">
+	<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Domain module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="checkDomainRequest.html">checkDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="createDomainRequest.html">createDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deleteDomainRequest.html">deleteDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifyDomainRequest.html">modifyDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renewDomainRequest.html">renewDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="restoreDomainRequest.html">restoreDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="retrieveAdditionalDataDomainRequest.html">retrieveAdditionalDataDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="retrieveCustomerAdditionalDataDomainRequest.html">retrieveCustomerAdditionalDataDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="retrieveDomainRequest.html">retrieveDomainRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="retrievePriceDomainRequest.html">retrievePriceDomainRequest</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">searchDomainRequest</a></li>
+</ul>
+</li>
+</ul>
+
+</ul>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="searchdomainrequest">
+<h1>searchDomainRequest<a class="headerlink" href="#searchdomainrequest" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>Searches through domains registered by subsidiaries of current reseller account. Returns a list of domains matching search criteria.</p>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">parameter</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>domainNamePattern</td>
+<td>The search pattern for the domain. May be any substring of the domain name not including the extension</td>
+</tr>
+<tr class="row-odd"><td>extension</td>
+<td>Domain name extension (&#8216;.com&#8217;, &#8216;.co.uk&#8217;, etc.) that will be included in the search criteria. If empty, all extensions will be matched</td>
+</tr>
+<tr class="row-even"><td>contactHandle</td>
+<td>Customer unique identifier or handle. Will match customer handles of all available types (owner, admin, tech or billing)</td>
+</tr>
+<tr class="row-odd"><td>nsGroupPattern</td>
+<td>Nameserves group pattern</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td><a class="reference internal" href="../terms/DomainStatus.html"><span class="doc">Domain status</span></a> (one of ACT, DEL, FAI, PEN, REQ, RRQ, SCH)</td>
+</tr>
+<tr class="row-odd"><td>withAdditionalData</td>
+<td>If set to &#8216;true&#8217;, the response will contain &#8216;additional data&#8217; relevant to each returned domain</td>
+</tr>
+<tr class="row-even"><td>limit</td>
+<td>Pagination parameter: maximum size of page returned. Default is 100, maximum value is 1000</td>
+</tr>
+<tr class="row-odd"><td>offset</td>
+<td>Pagination parameter: page offset. Default is 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="return-values">
+<h2>Return values<a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h2>
+<p>An array of domain details objects:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>domain</td>
+<td><a class="reference internal" href="../terms/Domain.html"><span class="doc">Domain object</span></a>, containing domain name and domain extension.</td>
+</tr>
+<tr class="row-even"><td>orderDate</td>
+<td>The date when domain registration was ordered</td>
+</tr>
+<tr class="row-odd"><td>activeDate</td>
+<td>The date when domain was marked as &#8216;active&#8217;</td>
+</tr>
+<tr class="row-even"><td>expirationDate</td>
+<td>Domain registry expiration date. Returned only if <a class="reference internal" href="../terms/DomainStatus.html"><span class="doc">domain status</span></a> is ACT</td>
+</tr>
+<tr class="row-odd"><td>expirationDateOpenprovider</td>
+<td>Date and time by which domain has to be renewed by reseller in Openprovider</td>
+</tr>
+<tr class="row-even"><td>ownerHandle</td>
+<td>Doman owner contact, as specified during domain registration</td>
+</tr>
+<tr class="row-odd"><td>adminHandle</td>
+<td>Domain administrative contact, as specified during domain registration</td>
+</tr>
+<tr class="row-even"><td>techHandle</td>
+<td>Domain technical contact, as specified during domain registration</td>
+</tr>
+<tr class="row-odd"><td>billingHandle</td>
+<td>Domain billing contact, as specified during domain registration</td>
+</tr>
+<tr class="row-even"><td>resellerHandle</td>
+<td>Domain reseller contact, as specified during domain registration</td>
+</tr>
+<tr class="row-odd"><td>nsGroup</td>
+<td>Plaintext name of the nameserver group, as created by reseller account.</td>
+</tr>
+<tr class="row-even"><td>nameServers</td>
+<td>List of <a class="reference internal" href="../terms/Nameserver.html"><span class="doc">nameservers</span></a> assigned to current domain</td>
+</tr>
+<tr class="row-odd"><td>authCode</td>
+<td>EPP code that is required for domain transfer, only in case if TLD supports it</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td><a class="reference internal" href="../terms/DomainStatus.html"><span class="doc">Domain status</span></a> (ACT, DEL, FAI, PEN, REQ, RRQ, SCH)</td>
+</tr>
+<tr class="row-odd"><td>autorenew</td>
+<td>Flag indicating whether the domain renewal will be performed automatically when expirationDateOpenprovider is reached. Possible values: on, off, default. See more details at</td>
+</tr>
+<tr class="row-even"><td>isLocked</td>
+<td>Enabling or disabling &#8216;theft protection&#8217;. When domain is &#8216;locked&#8217; (isLocked = 1) it means that EPP flag clientTransferProhibited is enabled on the side of registry and transfer operation with domain is not possible.</td>
+</tr>
+<tr class="row-odd"><td>useDomicile</td>
+<td>Enables use of domicile or trustee address for TLD that require local presence</td>
+</tr>
+<tr class="row-even"><td>at</td>
+<td>Date and time at which the domain transfer should be initiated (format: &#8216;Y-m-d H:i:s&#8217;, example: &#8216;2016-01-01 15:00:00&#8217;)</td>
+</tr>
+<tr class="row-odd"><td>additionalData</td>
+<td>Domain &#8216;additional data&#8217; returned only if the request contained &#8216;withAdditionalData=1&#8217;,</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="preconditions">
+<h2>Preconditions<a class="headerlink" href="#preconditions" title="Permalink to this headline">¶</a></h2>
+<p>None</p>
+</div>
+<div class="section" id="postconditions">
+<h2>Postconditions<a class="headerlink" href="#postconditions" title="Permalink to this headline">¶</a></h2>
+<p>None</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Using <a class="reference external" href="https://doc.openprovider.eu/index.php/API_General_Howto#PHP_class_for_easy_API_inclusion">PHP SDK</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$request = new OP_Request;
+$request-&gt;setCommand(&#39;searchDomainRequest&#39;)
+ -&gt;setAuth(array(&#39;username&#39; =&gt; &#39;username&#39;, &#39;password&#39; =&gt; &#39;password&#39;))
+ -&gt;setArgs(array(
+   &#39;offset&#39; =&gt; 50, //Will only return results if more than 50 domains found
+   &#39;limit&#39;  =&gt; 25,
+   &#39;contactHandle&#39; =&gt; &#39;AH009176-US&#39;,
+   &#39;domainNamePattern&#39; =&gt; &#39;openprovider&#39;
+ ));
+</pre></div>
+</div>
+<p>Raw XML</p>
+<p><em>Please note that newlines and leading spaces are added only for readability. Those whitespaces should be excluded from your XML command before sending it to Openprovider.</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;openXML&gt;
+  &lt;credentials&gt;
+    &lt;username&gt;username&lt;/username&gt;
+    &lt;password&gt;password&lt;/password&gt;
+  &lt;/credentials&gt;
+  &lt;searchDomainRequest&gt;
+    &lt;extension&gt;nl&lt;/extension&gt;
+    &lt;limit&gt;10&lt;/limit&gt;
+    &lt;offset&gt;0&lt;/offset&gt;
+    &lt;orderBy&gt;domainName&lt;/orderBy&gt;
+    &lt;order&gt;desc&lt;/order&gt;
+  &lt;/searchDomainRequest&gt;
+&lt;/openXML&gt;
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;openXML&gt;
+  &lt;reply&gt;
+    &lt;code&gt;0&lt;/code&gt;
+    &lt;desc&gt;
+    &lt;/desc&gt;
+    &lt;data&gt;
+      &lt;results&gt;
+        &lt;array&gt;
+          &lt;item&gt;
+            &lt;domain&gt;
+              &lt;name&gt;test-free-registration&lt;/name&gt;
+              &lt;extension&gt;nl&lt;/extension&gt;
+            &lt;/domain&gt;
+            &lt;nameServers /&gt;
+            &lt;id&gt;353146&lt;/id&gt;
+            &lt;isLockable&gt;0&lt;/isLockable&gt;
+            &lt;isLocked&gt;0&lt;/isLocked&gt;
+            &lt;comments&gt;&lt;/comments&gt;
+            &lt;orderDate&gt;2010-04-20 16:16:26&lt;/orderDate&gt;
+            &lt;activeDate&gt;2010-04-20 16:16:29&lt;/activeDate&gt;
+            &lt;expirationDate&gt;2011-04-20 14:16:28&lt;/expirationDate&gt;
+            &lt;expirationDateOpenprovider&gt;2011-04-20 14:16:28&lt;/expirationDateOpenprovider&gt;
+            &lt;status&gt;ACT&lt;/status&gt;
+            &lt;canRenew&gt;0&lt;/canRenew&gt;
+            &lt;autoRenew&gt;1&lt;/autoRenew&gt;
+            &lt;ownerHandle&gt;NL000115-NL&lt;/ownerHandle&gt;
+            &lt;adminHandle&gt;NL000115-NL&lt;/adminHandle&gt;
+            &lt;techHandle&gt;NL000115-NL&lt;/techHandle&gt;
+            &lt;billingHandle&gt;SR003891-NL&lt;/billingHandle&gt;
+            &lt;nsGroup&gt;dns-openprovider&lt;/nsGroup&gt;
+            &lt;type&gt;NEW&lt;/type&gt;
+            &lt;authCode&gt;sad08dfdsf&lt;/authCode&gt;
+            &lt;authorizationCodeRequired&gt;0&lt;/authorizationCodeRequired&gt;
+            &lt;tradeAllowed&gt;1&lt;/tradeAllowed&gt;
+            &lt;restorePrice&gt;70&lt;/restorePrice&gt;
+            &lt;useDomicile&gt;0&lt;/useDomicile&gt;
+            &lt;ownerName&gt;
+              &lt;initials&gt;N&lt;/initials&gt;
+              &lt;firstName&gt;Nigel&lt;/firstName&gt;
+              &lt;prefix /&gt;
+              &lt;lastName&gt;Jones&lt;/lastName&gt;
+            &lt;/ownername&gt;
+            &lt;ownerCompanyName&gt;Company Ltd&lt;/ownerCompanyName&gt;
+          &lt;/item&gt;
+          &lt;item&gt;
+            &lt;domain&gt;
+              &lt;name&gt;test-free-domain&lt;/name&gt;
+              &lt;extension&gt;nl&lt;/extension&gt;
+            &lt;/domain&gt;
+            &lt;nameServers /&gt;
+            &lt;id&gt;353163&lt;/id&gt;
+            &lt;isLockable&gt;0&lt;/isLockable&gt;
+            &lt;isLocked&gt;0&lt;/isLocked&gt;
+            &lt;comments /&gt;
+            &lt;orderDate&gt;2010-04-20 17:12:47&lt;/orderDate&gt;
+            &lt;activeDate&gt;2010-04-20 17:12:51&lt;/activeDate&gt;
+            &lt;expirationDate&gt;2011-04-20 15:12:50&lt;/expirationDate&gt;
+            &lt;expirationDateOpenprovider&gt;2011-04-20 15:12:50&lt;/expirationDateOpenprovider&gt;
+            &lt;status&gt;ACT&lt;/status&gt;
+            &lt;canRenew&gt;0&lt;/canRenew&gt;
+            &lt;autoRenew&gt;1&lt;/autoRenew&gt;
+            &lt;ownerHandle&gt;GB000002-GB&lt;/ownerHandle&gt;
+            &lt;adminHandle&gt;GB000002-GB&lt;/adminHandle&gt;
+            &lt;techHandle&gt;GB000002-GB&lt;/techHandle&gt;
+            &lt;billingHandle&gt;SR003891-NL&lt;/billingHandle&gt;
+            &lt;nsGroup&gt;dns-openprovider&lt;/nsGroup&gt;
+            &lt;type&gt;NEW&lt;/type&gt;
+            &lt;authCode&gt;sad08dfdsf&lt;/authCode&gt;
+            &lt;authorizationCodeRequired&gt;0&lt;/authorizationCodeRequired&gt;
+            &lt;tradeAllowed&gt;1&lt;/tradeAllowed&gt;
+            &lt;restorePrice&gt;70&lt;/restorePrice&gt;
+            &lt;useDomicile&gt;0&lt;/useDomicile&gt;
+            &lt;ownerName&gt;
+              &lt;initials&gt;UK&lt;/initials&gt;
+              &lt;firstName&gt;Great&lt;/firstName&gt;
+              &lt;prefix /&gt;
+              &lt;lastName&gt;Britain&lt;/lastName&gt;
+            &lt;/ownerName&gt;
+            &lt;ownerCompanyName&gt;&lt;/ownerCompanyName&gt;
+          &lt;/item&gt;
+          &lt;item&gt;
+            &lt;domain&gt;
+              &lt;name&gt;abcdefg&lt;/name&gt;
+              &lt;extension&gt;nl&lt;/extension&gt;
+            &lt;/domain&gt;
+            &lt;nameServers /&gt;
+            &lt;id&gt;341105&lt;/id&gt;
+            &lt;isLockable&gt;0&lt;/isLockable&gt;
+            &lt;isLocked&gt;0&lt;/isLocked&gt;
+            &lt;comments /&gt;
+            &lt;orderDate&gt;2010-03-15 16:50:19&lt;/orderDate&gt;
+            &lt;activeDate /&gt;
+            &lt;expirationDate&gt;2011-03-15 16:50:19&lt;/expirationDate&gt;
+            &lt;expirationDateOpenprovider /&gt;
+            &lt;status&gt;FAI&lt;/status&gt;
+            &lt;canRenew&gt;0&lt;/canRenew&gt;
+            &lt;autoRenew&gt;0&lt;/autoRenew&gt;
+            &lt;ownerHandle&gt;OH002766-NL&lt;/ownerHandle&gt;
+            &lt;adminHandle&gt;OH002766-NL&lt;/adminHandle&gt;
+            &lt;techHandle&gt;OH002766-NL&lt;/techHandle&gt;
+            &lt;billingHandle&gt;SR003891-NL&lt;/billingHandle&gt;
+            &lt;nsGroup&gt;opdrs4&lt;/nsGroup&gt;
+            &lt;type&gt;NEW&lt;/type&gt;
+            &lt;authCode&gt;88sdkjhf7&lt;/authCode&gt;
+            &lt;authorizationCodeRequired&gt;0&lt;/authorizationCodeRequired&gt;
+            &lt;tradeAllowed&gt;1&lt;/tradeAllowed&gt;
+            &lt;restorePrice&gt;70&lt;/restorePrice&gt;
+            &lt;useDomicile&gt;0&lt;/useDomicile&gt;
+            &lt;ownerName&gt;
+              &lt;initials&gt;I.&lt;/initials&gt;
+              &lt;firstName&gt;Ibrahim&lt;/firstName&gt;
+              &lt;prefix /&gt;
+              &lt;lastName&gt;Smith&lt;/lastName&gt;
+            &lt;/ownerName&gt;
+            &lt;ownerCompanyName&gt;&lt;/ownerCompanyName&gt;
+          &lt;/item&gt;
+        &lt;/array&gt;
+      &lt;/results&gt;
+      &lt;total&gt;3&lt;/total&gt;
+    &lt;/data&gt;
+  &lt;/reply&gt;
+&lt;/openXML&gt;
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="retrievePriceDomainRequest.html" title="retrievePriceDomainRequest"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">OpenProvider API 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Domain module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Sam Faktorovich.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

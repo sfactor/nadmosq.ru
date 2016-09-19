@@ -1,0 +1,153 @@
+retrieveDomainRequest
+=====================
+
+Purpose
+-------
+
+Retrieves full information about a domain registered under current reseller account. Domain must be identified by its name and extension.
+
+Parameters
+----------
+
+==================== ===========
+parameter            description
+==================== ===========
+domain               :doc:`Domain object </terms/Domain>`, containing domain name and domain extension.
+withAdditionalData   Boolean. If set to 'true', the response will contain 'additional data' relevant to each returned domain
+withRegistryDetails  Boolean. If set to 'true', the response will contain 'registry details' relevant to each returned domain
+==================== ===========
+
+
+Return values
+-------------
+
+An array of domain details objects:
+
+========================== =========================
+domain                     :doc:`Domain object </terms/Domain>`, containing domain name and domain extension.
+orderDate                  The date when domain registration was ordered	
+activeDate                 The date when domain was marked as 'active'
+expirationDate             Domain registry expiration date. Returned only if :doc:`domain status </terms/DomainStatus>` is ACT
+expirationDateOpenprovider Date and time by which domain has to be renewed by reseller in Openprovider
+ownerHandle                Doman owner contact, as specified during domain registration
+adminHandle                Domain administrative contact, as specified during domain registration 
+techHandle                 Domain technical contact, as specified during domain registration 
+billingHandle              Domain billing contact, as specified during domain registration 
+resellerHandle             Domain reseller contact, as specified during domain registration 
+nsGroup                    Plaintext name of the nameserver group, as created by reseller account. 
+nameServers                List of :doc:`nameservers </terms/Nameserver>` assigned to current domain
+authCode                   EPP code that is required for domain transfer, only in case if TLD supports it
+status                     :doc:`Domain status </terms/DomainStatus>` (ACT, DEL, FAI, PEN, REQ, RRQ, SCH) 
+autorenew                  Flag indicating whether the domain renewal will be performed automatically when expirationDateOpenprovider is reached. Possible values: on, off, default. See more details at
+isLocked                   Enabling or disabling 'theft protection'. When domain is 'locked' (isLocked = 1) it means that EPP flag clientTransferProhibited is enabled on the side of registry and transfer operation with domain is not possible.
+useDomicile                Enables use of domicile or trustee address for TLD that require local presence
+at                         Date and time at which the domain transfer should be initiated (format: 'Y-m-d H:i:s', example: '2016-01-01 15:00:00')
+additionalData             Domain 'additional data' returned only if the request contained 'withAdditionalData=true', 
+registryDetails            Additional registry details, returned only if the request contained 'withRegistryDetails=true')
+softQuarantineExpiryDate   Soft quarantine expiry date (returned only if :doc:`domain status </terms/DomainStatus>` is DEL or RRQ)
+hardQuarantineExpiryDate   Hard quarantine expiry date (returned only if :doc:`domain status </terms/DomainStatus>` is DEL or RRQ)
+restorableUntil            The date till the domain can be restored (returned only if :doc:`domain status </terms/DomainStatus>` is DEL or RRQ)
+========================== =========================
+
+
+Possible errors
+---------------
+If the provided domain does not exist under the reseller account, error TBD is returned.
+
+
+Preconditions
+-------------
+
+None
+
+Postconditions
+--------------
+
+None
+
+
+Examples
+--------
+
+Using `PHP SDK <https://doc.openprovider.eu/index.php/API_General_Howto#PHP_class_for_easy_API_inclusion>`_:
+
+::
+
+	$request = new OP_Request;
+	$request->setCommand('retrieveDomainRequest')
+	  ->setAuth(array('username' => 'username', 'password' => 'password'))
+	  ->setArgs(array(
+	    'domain' => array(
+	      'name' => 'openprovider',
+	      'extension' => 'nl'
+	    ),
+	    'withAdditionalData' => 0
+	  ));
+
+Raw XML
+
+*Please note that newlines and leading spaces are added only for readability. Those whitespaces should be excluded from your XML command before sending it to Openprovider.*
+
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <credentials>
+	    <username>username</username>
+	    <password>password</password>
+	  </credentials>
+	  <retrieveDomainRequest>
+	    <domain>
+	      <name>domain-info</name>
+	      <extension>nl</extension>
+	    </domain>
+	    <withadditionalData>0</withadditionalData>
+	  </retrieveDomainRequest>
+	</openXML>
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <reply>
+	    0
+	    <desc></desc>
+	    <data>
+	      <domain>
+	        <name>abcdefg4</name>
+	        <extension>nl</extension>
+	      </domain>
+	      <nameServers />
+	      <id>341105</id>
+	      <isLockable>0</isLockable>
+	      <isLocked>0</isLocked>
+	      <comments></comments>
+	      <orderDate>2010-03-15 16:50:19</orderDate>
+	      <activeDate />
+	      <expirationDate></expirationDate>
+	      <expirationDateOpenprovider></expirationDateOpenprovider>
+	      <status>FAI</status>
+	      <canRenew>0</canRenew>
+	      <autoRenew>0</autoRenew>
+	      <ownerHandle>OH002766-NL</ownerHandle>
+	      <adminHandle>OH002766-NL</adminHandle>
+	      <techHandle>OH002766-NL</techHandle>
+	      <billingHandle>SR003891-NL</billingHandle>
+	      <nsGroup>opdrs4</nsGroup>
+	      <type>NEW</type>
+	      <authCode></authCode>
+	      <authorizationCodeRequired>0</authorizationCodeRequired>
+	      <tradeAllowed>1</tradeAllowed>
+	      <restorePrice>70</restorePrice>
+	      <useDomicile>0</useDomicile>
+	      <ownerName>
+	        <initials>N.</initials>
+	        <firstName>Nigel</firstName>
+	        <prefix />
+	        <lastName>Jones</lastName>
+	      </ownerName>
+	      <ownerCompanyName></ownerCompanyName>
+	    </data>
+	  </reply>
+	</openXML>

@@ -1,0 +1,16 @@
+Domain object
+=============
+
+An object identifying a nameserver.
+
+Fields
+------
+
+========= =======
+Field     Comment
+========= =======
+name      Hostname of the nameserver
+ip        IPv4 address of the nameserver. Mandatory if 'ip6' field is empty
+ip6       IPv6 address of the nameserver. Mandatory if 'ip' field is empty
+========= =======
+

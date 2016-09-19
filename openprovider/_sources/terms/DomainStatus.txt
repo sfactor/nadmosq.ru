@@ -1,0 +1,16 @@
+Domain status
+=============
+
+Domain status, as returned by multiple API requests, is represented by a string that holds one of the following values:
+
+====== ==========
+Status Definition
+====== ==========  
+ACT    The domain name is active
+DEL    The domain name has been deleted, but may still be restored.
+FAI    The domain name request has failed.
+PEN    The domain name request is pending further information before the process can continue.
+REQ    The domain name request has been placed, but not yet finished.
+RRQ    The domain name restore has been requested, but not yet completed.
+SCH    The domain name is scheduled for transfer in the future.
+====== ==========

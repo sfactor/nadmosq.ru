@@ -1,0 +1,16 @@
+Domain object
+=============
+
+
+An object identifying a domain.
+
+Fields
+------
+
+========= =======
+Field     Comment
+========= =======
+name      The domain name without extension
+extension Domain name extension ('.com', '.co.uk', etc.)
+========= =======
+

@@ -1,0 +1,86 @@
+restoreDomainRequest
+=====================
+
+Purpose
+-------
+
+Reactivates (restores) a domain marked for deletion.
+
+Parameters
+----------
+
+==================== ===========
+parameter            description
+==================== ===========
+domain               :doc:`Domain object </terms/Domain>` to be renewed
+==================== ===========
+
+
+Return values
+-------------
+
+None. In case of success, the return code will be 0.
+
+Possible errors
+---------------
+
+TBD
+
+Preconditions
+-------------
+
+The domain must be previously scheduled for deletion.
+
+Postconditions
+--------------
+
+Domain deletion is cancelled.
+
+Examples
+--------
+
+Using `PHP SDK <https://doc.openprovider.eu/index.php/API_General_Howto#PHP_class_for_easy_API_inclusion>`_:
+
+::
+
+	$request = new OP_Request;
+	$request->setCommand('restoreDomainRequest')
+	  ->setAuth(array('username' => 'username', 'password' => 'password'))
+	  ->setArgs(array(
+	    'domain' => array(
+	        'name' => 'openprovider',
+	        'extension' => 'nl'
+	    )
+	  ));
+
+Raw XML
+
+*Please note that newlines and leading spaces are added only for readability. Those whitespaces should be excluded from your XML command before sending it to Openprovider.*
+
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <credentials>
+	    <username>username</username>
+	    <password>password</password>
+	  </credentials>
+	  <restoreDomainRequest>
+	    <domain>
+	      <name>deleted-domain</name>
+	      <extension>com</extension>
+	    </domain>
+	  </restoreDomainRequest>
+	</openXML>
+
+	
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <reply>
+	    <code>0</code>
+	    <desc></desc>
+	  </reply>
+	</openXML>

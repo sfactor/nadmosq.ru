@@ -1,0 +1,125 @@
+checkDomainRequest
+=====================
+
+Purpose
+-------
+
+Returns avaialbility of one or more domain names (whether they are available for registration or not).
+
+Parameters
+----------
+
+==================== ===========
+parameter            description
+==================== ===========
+domains              Array of :doc:`domain objects </terms/Domain>` to be checked
+==================== ===========
+
+
+Return values
+-------------
+
+An array of result objects:
+
+========================== =========================
+domain                     String value representing domain, including domain name and extension (e.g. 'example.com')
+status                     :doc:`Domain status </terms/DomainStatus>` (ACT, DEL, FAI, PEN, REQ, RRQ, SCH) 
+reason                     (returned only for active domains) String value containing human-readable reason of why the domain is not available for registration (already registered, reserved name, invalid name...)
+========================== =========================
+
+
+Preconditions
+-------------
+
+None
+
+Postconditions
+--------------
+
+None
+
+
+Examples
+--------
+
+Using `PHP SDK <https://doc.openprovider.eu/index.php/API_General_Howto#PHP_class_for_easy_API_inclusion>`_:
+
+::
+
+	$request = new OP_Request;
+	$request->setCommand('checkDomainRequest')
+	  ->setAuth(array('username' => 'username', 'password' => 'password'))
+	  ->setArgs(array(
+	    'domains' => array(
+	      array(
+	        'name' => 'openprovider',
+	        'extension' => 'com'
+	      ),
+	      array(
+	        'name' => 'this-domain-is-free',
+	        'extension' => 'biz'
+	      )
+	    )
+	  ));
+
+Raw XML
+
+*Please note that newlines and leading spaces are added only for readability. Those whitespaces should be excluded from your XML command before sending it to Openprovider.*
+
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <credentials>
+	    <username>username</username>
+	    <password>password</password>
+	  </credentials>
+	  <checkDomainRequest>
+	    <domains>
+	      <array>
+	        <item>
+	          <name>openprovider</name>
+	          <extension>com</extension>
+	        </item>
+	        <item>
+	          <name>this-domain-is-free</name>
+	          <extension>biz</extension>
+	        </item>
+	        <item>
+	          <name>greece</name>
+	          <extension>guru</extension>
+	        </item>
+	      </array>
+	    </domains>
+	  </checkDomainRequest>
+	</openXML>
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <reply>
+	    < code>0</code>
+	    <desc>
+	    </desc>
+	    <data>
+	      <array>
+	        <item>
+	          <domain>openprovider.nl</domain>
+	          <status>active</status>
+	          <reason>Domain exists</reason>
+	        </item>
+	        <item>
+	          <domain>this-domain-is-free.biz</domain>
+	          <status>free</status>
+	        </item>
+	        <item>
+	          <domain>greece.guru</domain>
+	          <status>active</status>
+	          <reason>Reserved Domain Name</reason>
+	        </item>
+	      </array>
+	    </data>
+	  </reply>
+	</openXML>

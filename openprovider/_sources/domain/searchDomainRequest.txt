@@ -1,0 +1,231 @@
+searchDomainRequest
+===================
+
+Purpose
+-------
+
+Searches through domains registered by subsidiaries of current reseller account. Returns a list of domains matching search criteria.
+
+
+Parameters
+----------
+
+================== ======================================================================================================
+parameter          description
+================== ======================================================================================================
+domainNamePattern  The search pattern for the domain. May be any substring of the domain name not including the extension
+extension          Domain name extension ('.com', '.co.uk', etc.) that will be included in the search criteria. If empty, all extensions will be matched
+contactHandle      Customer unique identifier or handle. Will match customer handles of all available types (owner, admin, tech or billing)
+nsGroupPattern     Nameserves group pattern
+status             :doc:`Domain status </terms/DomainStatus>` (one of ACT, DEL, FAI, PEN, REQ, RRQ, SCH)
+withAdditionalData If set to 'true', the response will contain 'additional data' relevant to each returned domain
+limit              Pagination parameter: maximum size of page returned. Default is 100, maximum value is 1000
+offset             Pagination parameter: page offset. Default is 0
+
+================== ======================================================================================================
+
+
+Return values
+-------------
+
+An array of domain details objects:
+
+========================== =========================
+domain                     :doc:`Domain object </terms/Domain>`, containing domain name and domain extension.
+orderDate                  The date when domain registration was ordered	
+activeDate                 The date when domain was marked as 'active'
+expirationDate             Domain registry expiration date. Returned only if :doc:`domain status </terms/DomainStatus>` is ACT
+expirationDateOpenprovider Date and time by which domain has to be renewed by reseller in Openprovider
+ownerHandle                Doman owner contact, as specified during domain registration
+adminHandle                Domain administrative contact, as specified during domain registration 
+techHandle                 Domain technical contact, as specified during domain registration 
+billingHandle              Domain billing contact, as specified during domain registration 
+resellerHandle             Domain reseller contact, as specified during domain registration 
+nsGroup                    Plaintext name of the nameserver group, as created by reseller account. 
+nameServers                List of :doc:`nameservers </terms/Nameserver>` assigned to current domain
+authCode                   EPP code that is required for domain transfer, only in case if TLD supports it
+status                     :doc:`Domain status </terms/DomainStatus>` (ACT, DEL, FAI, PEN, REQ, RRQ, SCH) 
+autorenew                  Flag indicating whether the domain renewal will be performed automatically when expirationDateOpenprovider is reached. Possible values: on, off, default. See more details at
+isLocked                   Enabling or disabling 'theft protection'. When domain is 'locked' (isLocked = 1) it means that EPP flag clientTransferProhibited is enabled on the side of registry and transfer operation with domain is not possible.
+useDomicile                Enables use of domicile or trustee address for TLD that require local presence
+at                         Date and time at which the domain transfer should be initiated (format: 'Y-m-d H:i:s', example: '2016-01-01 15:00:00')
+additionalData             Domain 'additional data' returned only if the request contained 'withAdditionalData=1', 
+========================== =========================
+
+
+Preconditions
+-------------
+
+None
+
+Postconditions
+--------------
+
+None
+
+
+Examples
+--------
+
+Using `PHP SDK <https://doc.openprovider.eu/index.php/API_General_Howto#PHP_class_for_easy_API_inclusion>`_:
+
+::
+
+	$request = new OP_Request;
+	$request->setCommand('searchDomainRequest')
+	 ->setAuth(array('username' => 'username', 'password' => 'password'))
+	 ->setArgs(array(
+	   'offset' => 50, //Will only return results if more than 50 domains found
+	   'limit'  => 25,
+	   'contactHandle' => 'AH009176-US',
+	   'domainNamePattern' => 'openprovider'
+	 ));
+
+Raw XML
+
+*Please note that newlines and leading spaces are added only for readability. Those whitespaces should be excluded from your XML command before sending it to Openprovider.*
+
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <credentials>
+	    <username>username</username>
+	    <password>password</password>
+	  </credentials>
+	  <searchDomainRequest>
+	    <extension>nl</extension>
+	    <limit>10</limit>
+	    <offset>0</offset>
+	    <orderBy>domainName</orderBy>
+	    <order>desc</order>
+	  </searchDomainRequest>
+	</openXML>
+
+
+::
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<openXML>
+	  <reply>
+	    <code>0</code>
+	    <desc>
+	    </desc>
+	    <data>
+	      <results>
+	        <array>
+	          <item>
+	            <domain>
+	              <name>test-free-registration</name>
+	              <extension>nl</extension>
+	            </domain>
+	            <nameServers />
+	            <id>353146</id>
+	            <isLockable>0</isLockable>
+	            <isLocked>0</isLocked>
+	            <comments></comments>
+	            <orderDate>2010-04-20 16:16:26</orderDate>
+	            <activeDate>2010-04-20 16:16:29</activeDate>
+	            <expirationDate>2011-04-20 14:16:28</expirationDate>
+	            <expirationDateOpenprovider>2011-04-20 14:16:28</expirationDateOpenprovider>
+	            <status>ACT</status>
+	            <canRenew>0</canRenew>
+	            <autoRenew>1</autoRenew>
+	            <ownerHandle>NL000115-NL</ownerHandle>
+	            <adminHandle>NL000115-NL</adminHandle>
+	            <techHandle>NL000115-NL</techHandle>
+	            <billingHandle>SR003891-NL</billingHandle>
+	            <nsGroup>dns-openprovider</nsGroup>
+	            <type>NEW</type>
+	            <authCode>sad08dfdsf</authCode>
+	            <authorizationCodeRequired>0</authorizationCodeRequired>
+	            <tradeAllowed>1</tradeAllowed>
+	            <restorePrice>70</restorePrice>
+	            <useDomicile>0</useDomicile>
+	            <ownerName>
+	              <initials>N</initials>
+	              <firstName>Nigel</firstName>
+	              <prefix />
+	              <lastName>Jones</lastName>
+	            </ownername>
+	            <ownerCompanyName>Company Ltd</ownerCompanyName>
+	          </item>
+	          <item>
+	            <domain>
+	              <name>test-free-domain</name>
+	              <extension>nl</extension>
+	            </domain>
+	            <nameServers />
+	            <id>353163</id>
+	            <isLockable>0</isLockable>
+	            <isLocked>0</isLocked>
+	            <comments />
+	            <orderDate>2010-04-20 17:12:47</orderDate>
+	            <activeDate>2010-04-20 17:12:51</activeDate>
+	            <expirationDate>2011-04-20 15:12:50</expirationDate>
+	            <expirationDateOpenprovider>2011-04-20 15:12:50</expirationDateOpenprovider>
+	            <status>ACT</status>
+	            <canRenew>0</canRenew>
+	            <autoRenew>1</autoRenew>
+	            <ownerHandle>GB000002-GB</ownerHandle>
+	            <adminHandle>GB000002-GB</adminHandle>
+	            <techHandle>GB000002-GB</techHandle>
+	            <billingHandle>SR003891-NL</billingHandle>
+	            <nsGroup>dns-openprovider</nsGroup>
+	            <type>NEW</type>
+	            <authCode>sad08dfdsf</authCode>
+	            <authorizationCodeRequired>0</authorizationCodeRequired>
+	            <tradeAllowed>1</tradeAllowed>
+	            <restorePrice>70</restorePrice>
+	            <useDomicile>0</useDomicile>
+	            <ownerName>
+	              <initials>UK</initials>
+	              <firstName>Great</firstName>
+	              <prefix />
+	              <lastName>Britain</lastName>
+	            </ownerName>
+	            <ownerCompanyName></ownerCompanyName>
+	          </item>
+	          <item>
+	            <domain>
+	              <name>abcdefg</name>
+	              <extension>nl</extension>
+	            </domain>
+	            <nameServers />
+	            <id>341105</id>
+	            <isLockable>0</isLockable>
+	            <isLocked>0</isLocked>
+	            <comments />
+	            <orderDate>2010-03-15 16:50:19</orderDate>
+	            <activeDate />
+	            <expirationDate>2011-03-15 16:50:19</expirationDate>
+	            <expirationDateOpenprovider />
+	            <status>FAI</status>
+	            <canRenew>0</canRenew>
+	            <autoRenew>0</autoRenew>
+	            <ownerHandle>OH002766-NL</ownerHandle>
+	            <adminHandle>OH002766-NL</adminHandle>
+	            <techHandle>OH002766-NL</techHandle>
+	            <billingHandle>SR003891-NL</billingHandle>
+	            <nsGroup>opdrs4</nsGroup>
+	            <type>NEW</type>
+	            <authCode>88sdkjhf7</authCode>
+	            <authorizationCodeRequired>0</authorizationCodeRequired>
+	            <tradeAllowed>1</tradeAllowed>
+	            <restorePrice>70</restorePrice>
+	            <useDomicile>0</useDomicile>
+	            <ownerName>
+	              <initials>I.</initials>
+	              <firstName>Ibrahim</firstName>
+	              <prefix />
+	              <lastName>Smith</lastName>
+	            </ownerName>
+	            <ownerCompanyName></ownerCompanyName>
+	          </item>
+	        </array>
+	      </results>
+	      <total>3</total>
+	    </data>
+	  </reply>
+	</openXML>
